@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.p-menubar {
+  background-color: #1e293b;
+  color: white;
+}
+
+.p-menubar-button:hover {
+  background-color: #94a3b8;
+}
+
+.p-focus .p-menuitem-content {
+  background-color: #475569;
+}
+
+.p-menuitem-text {
+  color: white;
+}
+
+.p-menuitem-content {
+  transition: ease 0.5;
+}
+
+.p-menuitem-content:hover {
+  background-color: #94a3b8;
+}
+
+.p-menubar-mobile-active .p-menuitem {
+  background-color: #475569;
+}
+
+.p-menubar-mobile-active .p-menuitem-content {
+  background-color: #475569;
+}
+
+.p-menubar-mobile-active .p-menuitem:hover {
+  background-color: #94a3b8;
+}
+
+.p-menubar-mobile-active .p-menuitem-content:hover {
+  background-color: #94a3b8;
+}
+
+.p-menuitem-active .p-menuitem-content {
+  background-color: #475569;
+}
+
+.p-menuitem-active .p-menuitem-content:hover {
+  background-color: #94a3b8;
+}
+
+.p-inputtext {
+  color: black;
+}
+
+p {
+  color: white;
+}
+
+.p-fieldset-content {
+  background-color: #334155;
+}
+
+.btn-light {
+  background-color: #cbd5e1;
+  padding: .5rem
+}
+
+.btn-light:hover {
+  background-color: #94a3b8;
+}
