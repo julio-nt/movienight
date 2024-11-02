@@ -5,14 +5,14 @@ import { MovieApiModel } from "../../api/models";
 import myApi from "../../api/request/myApi";
 import { useEffect, useState } from "react";
 
-const Liked = () => {
+const Hated = () => {
   const { getAll } = myApi();
-  const [movieLiked, setMovieLiked] = useState<MovieApiModel[]>([]);
+  const [movieHated, setMovieHated] = useState<MovieApiModel[]>([]);
 
   const loadData = async () => {
     const moviesRequest: MovieApiModel[] = await getAll("movie");
 
-    setMovieLiked(moviesRequest.filter((mr) => mr.like));
+    setMovieHated(moviesRequest.filter((mr) => mr.hate));
   };
 
   useEffect(() => {
@@ -21,13 +21,13 @@ const Liked = () => {
 
   return (
     <div className="space-y-8">
-      <Title title="Gostei" />
+      <Title title="Odiei" />
       <Fieldset>
-        <MovieCard data={movieLiked} />
-        {movieLiked.length === 0 && <p>Nenhum filme adicionado a lista de gostei</p>}
+        <MovieCard data={movieHated} />
+        {movieHated.length === 0 && <p>Nenhum filme adicionado a lista de odiei</p>}
       </Fieldset>
     </div>
   );
 };
 
-export default Liked;
+export default Hated;

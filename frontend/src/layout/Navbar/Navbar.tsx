@@ -24,7 +24,7 @@ const Navbar = () => {
     {
       label: "Quero Assistir",
       icon: "pi pi-star",
-      url: "/favorites",
+      url: "/wish",
     },
     {
       label: "Recomendados",
@@ -61,7 +61,7 @@ const Navbar = () => {
   };
 
   const start = (
-    <h2 className="text-2xl font-bold mr-[0.5rem] cursor-pointer" onClick={() => navigate("/")}>
+    <h2 className="text-2xl font-bold mr-[0.5rem] cursor-pointer pl-2" onClick={() => navigate("/")}>
       Movie Night
     </h2>
   );
@@ -98,7 +98,11 @@ const Navbar = () => {
     </div>
   );
 
-  return <div className="card bg-slate-800">{width < 597 ? <Menubar model={items} end={mobile} /> : <Menubar model={items} start={start} end={end} />}</div>;
+  return (
+    <div className="card bg-slate-800">
+      <Menubar className="fixed w-full" model={items} start={width < 597 ? undefined : start} end={width < 597 ? mobile : end} />
+    </div>
+  );
 };
 
 export default Navbar;

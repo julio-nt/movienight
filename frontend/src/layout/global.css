@@ -5,6 +5,7 @@
 .p-menubar {
   background-color: #1e293b;
   color: white;
+  z-index: 999;
 }
 
 .p-menubar-button:hover {

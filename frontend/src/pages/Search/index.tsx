@@ -8,12 +8,10 @@ import { Button } from "primereact/button";
 import { MovieApiModel } from "../../api/models";
 import myApi from "../../api/request/myApi";
 import { Toast } from "primereact/toast";
-import useWidth from "../../utils/useWidth";
 
 const Search = () => {
   const { useSearch } = useApi();
   const { postItem } = myApi();
-  const { width } = useWidth();
 
   const toast = useRef<any>(null);
 
@@ -53,20 +51,48 @@ const Search = () => {
   }
 
   const handleClick = async (item: ResultsModel, type: "fav" | "wish" | "like" | "dislike" | "hate" | "recommend") => {
-    const sendData: MovieApiModel = {
-      name: item.title,
-      image_tmdb: item.poster_path,
-      category_fk_list: item.genre_ids,
-      favorite: type === "fav",
-      dislike: type === "dislike",
-      wish_to_watch: type === "wish",
-      hate: type === "hate",
-      like: type === "like",
-    };
-    await postItem("movie", sendData);
+    try {
+      const sendData: MovieApiModel = {
+        name: item.title,
+        id_tmdb: item.id,
+        image_tmdb: item.poster_path,
+        category_fk_list: item.genre_ids,
+        favorite: type === "fav",
+        dislike: type === "dislike",
+        wish_to_watch: type === "wish",
+        hate: type === "hate",
+        like: type === "like",
+        vote_count: item.vote_count,
+        vote_average: item.vote_average,
+        release_date: item.release_date,
+      };
+      await postItem("movie", sendData);
+
+      let toast_msg = "";
+
+      if (type === "fav") {
+        toast_msg = "Favoritado";
+      }
+      if (type === "dislike") {
+        toast_msg = "Definido como não gostei";
+      }
+      if (type === "wish") {
+        toast_msg = "Adicionado a lista de desejos";
+      }
+      if (type === "hate") {
+        toast_msg = "Destruido com sucesso";
+      }
+      if (type === "like") {
+        toast_msg = "Definido como gostei";
+      }
+
+      show("success", `${toast_msg} com sucesso`);
+    } catch (error) {
+      show("error", `Algo deu errado`);
+    }
   };
 
-  const show = (color: "info" | "success" | "warn" | "danger" | "secondary", text: string) => {
+  const show = (color: "info" | "success" | "warn" | "error" | "secondary", text: string) => {
     toast.current?.show({ severity: color, detail: text });
   };
 
@@ -80,12 +106,12 @@ const Search = () => {
           return (
             <Fieldset key={result.id}>
               <div className="flex gap-4 flex-wrap ">
-                <div className="w-full min-[500px]:w-auto">
+                <div className="w-full min-[600px]:w-[250px]">
                   <img src={`${imageRoute}${result.poster_path}`} className="w-full h-auto min-[500px]:w-[250px] h-[375px]" />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col ">
                   <p className="text-xl">{result.title}</p>
-                  <p>{result.overview}</p>
+                  <p className="max-w-[600px]">{result.overview}</p>
                   <div className="mt-auto">
                     <p>{result.release_date}</p>
                     <div className="flex flex-wrap gap-4">

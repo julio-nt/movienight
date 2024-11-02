@@ -1,9 +1,33 @@
-const Liked = () => {
+import { Fieldset } from "primereact/fieldset";
+import Title from "../../components/Title/Title";
+import MovieCard from "../../components/MovieCard/MovieCard";
+import { MovieApiModel } from "../../api/models";
+import myApi from "../../api/request/myApi";
+import { useEffect, useState } from "react";
+
+const Favorites = () => {
+  const { getAll } = myApi();
+  const [movieFavorites, setMovieFavorites] = useState<MovieApiModel[]>([]);
+
+  const loadData = async () => {
+    const moviesRequest: MovieApiModel[] = await getAll("movie");
+
+    setMovieFavorites(moviesRequest.filter((mr) => mr.favorite));
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
   return (
-    <div>
-      <p>liked</p>
+    <div className="space-y-8">
+      <Title title="Favoritos" />
+      <Fieldset>
+        <MovieCard data={movieFavorites} />
+        {movieFavorites.length === 0 && <p>Nenhum filme adicionado aos favoritos</p>}
+      </Fieldset>
     </div>
   );
 };
 
-export default Liked;
+export default Favorites;

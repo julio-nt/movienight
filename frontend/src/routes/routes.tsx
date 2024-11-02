@@ -2,21 +2,25 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../layout/index.tsx";
 import Home from "../pages/Home";
-import Favorites from "../pages/Favorites";
-import Liked from "../pages/Liked";
+import Liked from "../pages/Liked/index.tsx";
+import Favorites from "../pages/Favorites/index.tsx";
 import Recommended from "../pages/Recommended";
 import Search from "../pages/Search";
+import Wish from "../pages/Wish/index.tsx";
+import Disliked from "../pages/Disliked/index.tsx";
+import Hated from "../pages/Hate/index.tsx";
 
 const router = createBrowserRouter([
   {
-    element: <Layout />, // Envolva o layout aqui
+    element: <Layout />,
     children: [
       { path: "/", element: <Home /> },
       { path: "/favorites", element: <Favorites /> },
       { path: "/recommended", element: <Recommended /> },
       { path: "/liked", element: <Liked /> },
-      { path: "/disliked", element: <Home /> }, // Atualize as rotas conforme necessário
-      { path: "/hated", element: <Home /> },
+      { path: "/disliked", element: <Disliked /> },
+      { path: "/wish", element: <Wish /> },
+      { path: "/hated", element: <Hated /> },
       { path: "/busca", element: <Search /> },
     ],
   },
