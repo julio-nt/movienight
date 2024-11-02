@@ -1,3 +1,5 @@
 const imageRoute = "https://image.tmdb.org/t/p/original";
 
-export { imageRoute };
+const apiUrl = "http://192.168.1.6:5000";
+
+export { imageRoute, apiUrl };

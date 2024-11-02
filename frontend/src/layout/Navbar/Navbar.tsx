@@ -1,12 +1,13 @@
 import { Menubar } from "primereact/menubar";
-import { InputText } from "primereact/inputtext";
 import { Avatar } from "primereact/avatar";
-import { Button } from "primereact/button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import InputGroup from "../../components/Inputs/InputGroup";
+import useWidth from "../../utils/useWidth";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { width } = useWidth();
 
   const [input, setInput] = useState("");
   const items: any[] = [
@@ -54,26 +55,50 @@ const Navbar = () => {
   ];
 
   const handleSearch = async () => {
-    console.log(input);
     if (input) {
       navigate(`/busca?p=${input}`);
     }
   };
 
-  const start = <h2 className="text-2xl font-bold mr-[0.5rem]">Movie Night</h2>;
+  const start = (
+    <h2 className="text-2xl font-bold mr-[0.5rem] cursor-pointer" onClick={() => navigate("/")}>
+      Movie Night
+    </h2>
+  );
   const end = (
-    <div className="flex align-items-center gap-2 bg-slate-800 ">
-      <InputText placeholder="Buscar" type="text" className="w-8rem sm:w-auto pl-2" value={input} onChange={(e) => setInput(e.target.value)} />
-      <Button label="ir" onClick={handleSearch} />
+    <div className="flex align-items-center gap-24 bg-slate-800 pl-2">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSearch();
+        }}
+      >
+        <InputGroup value={input} setValue={setInput} />
+      </form>
       <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
     </div>
   );
 
-  return (
-    <div className="card bg-slate-800">
-      <Menubar model={items} start={start} end={end} />
+  const mobile = (
+    <div className="ml-4">
+      <h2 className="text-2xl font-bold mr-[0.5rem] cursor-pointer" onClick={() => navigate("/")}>
+        Movie Night
+      </h2>
+      <div className={`flex align-items-center ${width >= 457 ? "gap-24" : "gap-4"} bg-slate-800 ${width < 597 && "pl-0"}`}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSearch();
+          }}
+        >
+          <InputGroup value={input} setValue={setInput} />
+        </form>
+        <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
+      </div>
     </div>
   );
+
+  return <div className="card bg-slate-800">{width < 597 ? <Menubar model={items} end={mobile} /> : <Menubar model={items} start={start} end={end} />}</div>;
 };
 
 export default Navbar;

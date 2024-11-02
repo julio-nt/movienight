@@ -4,6 +4,8 @@ async function createMovie(req, res) {
   try {
     const { name, category_fk } = req.body;
 
+    console.log(req.body)
+
     if (!name) {
       return res.status(400).json({ msg: "Nome é necessário" });
     }

@@ -59,13 +59,23 @@ p {
   color: white;
 }
 
+.p-fieldset {
+  background-color: #334155;
+}
+
 .p-fieldset-content {
   background-color: #334155;
 }
 
+.p-fieldset-legend {
+  background-color: #334155;
+  color: white;
+  padding: .3rem;
+}
+
 .btn-light {
   background-color: #cbd5e1;
-  padding: .5rem
+  padding: 0.5rem;
 }
 
 .btn-light:hover {

@@ -14,6 +14,10 @@ const Movie = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    image_tmdb: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     details: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -23,6 +27,11 @@ const Movie = sequelize.define(
       allowNull: true,
     },
     favorite: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false,
+    },
+    like: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
       defaultValue: false,
@@ -42,7 +51,7 @@ const Movie = sequelize.define(
       allowNull: true,
       defaultValue: false,
     },
-    category_fk: {
+    category_fk_list: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
