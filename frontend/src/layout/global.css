@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background-color: #1e293b;
+}
+
 .p-menubar {
   background-color: #1e293b;
   color: white;
@@ -71,7 +75,7 @@ p {
 .p-fieldset-legend {
   background-color: #334155;
   color: white;
-  padding: .3rem;
+  padding: 0.3rem;
 }
 
 .btn-light {

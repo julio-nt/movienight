@@ -9,8 +9,13 @@ import Search from "../pages/Search";
 import Wish from "../pages/Wish/index.tsx";
 import Disliked from "../pages/Disliked/index.tsx";
 import Hated from "../pages/Hate/index.tsx";
+import Login from "../pages/Login/index.tsx";
 
 const router = createBrowserRouter([
+  {
+    path: "/login",
+    element: <Login />,
+  },
   {
     element: <Layout />,
     children: [

@@ -2,16 +2,16 @@ const Movie = require("../models/movie");
 
 async function createMovie(req, res) {
   try {
-    const { name, category_fk } = req.body;
+    const { name, id_tmdb } = req.body;
 
-    console.log(req.body)
+    console.log(req.body);
 
     if (!name) {
       return res.status(400).json({ msg: "Nome é necessário" });
     }
 
-    if (!category_fk) {
-      return res.status(400).json({ msg: "Categoria é necessário" });
+    if (!id_tmdb) {
+      return res.status(400).json({ msg: "ID referência do The Movie Database é necessário" });
     }
 
     const movie = await Movie.create(req.body);

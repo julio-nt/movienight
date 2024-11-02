@@ -14,6 +14,10 @@ const Movie = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    id_tmdb: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     image_tmdb: {
       type: DataTypes.STRING,
       allowNull: true,
@@ -34,29 +38,41 @@ const Movie = sequelize.define(
     like: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
-      defaultValue: false,
+      defaultValue: true,
     },
     dislike: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
-      defaultValue: false,
+      defaultValue: true,
     },
     hate: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
-      defaultValue: false,
+      defaultValue: true,
     },
     wish_to_watch: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
-      defaultValue: false,
+      defaultValue: true,
     },
     category_fk_list: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     sub_category_fk: {
       type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    vote_average: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: true,
+    },
+    vote_count: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    release_date: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
   },
