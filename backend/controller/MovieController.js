@@ -2,9 +2,7 @@ const Movie = require("../models/movie");
 
 async function createMovie(req, res) {
   try {
-    const { name, id_tmdb } = req.body;
-
-    console.log(req.body);
+    const { name, id_tmdb, user_fk } = req.body;
 
     if (!name) {
       return res.status(400).json({ msg: "Nome é necessário" });
@@ -12,6 +10,10 @@ async function createMovie(req, res) {
 
     if (!id_tmdb) {
       return res.status(400).json({ msg: "ID referência do The Movie Database é necessário" });
+    }
+
+    if (!user_fk) {
+      return res.status(400).json({ msg: "Usuário é necessário" });
     }
 
     const movie = await Movie.create(req.body);
@@ -23,8 +25,11 @@ async function createMovie(req, res) {
 }
 
 async function getAllMovies(req, res) {
+  const user_fk = req.headers.user_fk;
   try {
-    const movie = await Movie.findAll();
+    const movie = await Movie.findAll({
+      where: { user_fk },
+    });
     return res.status(200).json(movie);
   } catch (error) {
     console.error(error.message);

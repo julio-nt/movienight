@@ -14,6 +14,10 @@ const Movie = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    user_fk: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     id_tmdb: {
       type: DataTypes.INTEGER,
       allowNull: false,

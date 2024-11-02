@@ -1,6 +1,5 @@
 import { Menubar } from "primereact/menubar";
-import { Avatar } from "primereact/avatar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import InputGroup from "../../components/Inputs/InputGroup";
 import useWidth from "../../utils/useWidth";
@@ -8,6 +7,14 @@ import useWidth from "../../utils/useWidth";
 const Navbar = () => {
   const navigate = useNavigate();
   const { width } = useWidth();
+
+  const localUser = localStorage.getItem("user");
+  const [user, setUser] = useState<any>();
+
+  useEffect(() => {
+    const jsonUser = JSON.parse(localUser!);
+    setUser(jsonUser);
+  }, []);
 
   const [input, setInput] = useState("");
   const items: any[] = [
@@ -75,7 +82,9 @@ const Navbar = () => {
       >
         <InputGroup value={input} setValue={setInput} />
       </form>
-      <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
+      <div className="min-w-[100px]">
+        <p>Olá {user?.name}</p>
+      </div>
     </div>
   );
 
@@ -93,7 +102,9 @@ const Navbar = () => {
         >
           <InputGroup value={input} setValue={setInput} />
         </form>
-        <Avatar image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png" shape="circle" />
+        <div className="min-w-[80px]">
+          <p>Olá {user?.name}</p>
+        </div>
       </div>
     </div>
   );

@@ -26,7 +26,7 @@ const Home = () => {
   useEffect(() => {
     loadData();
   }, []);
-  
+
   return (
     <div className="space-y-8">
       <Title title="Bem Vindo" className="" />

@@ -5,6 +5,7 @@ type AllApiModels = MovieApiModel;
 type MovieApiModel = {
   id?: number;
   name: string;
+  user_fk: number;
   id_tmdb: number;
   image_tmdb?: string;
   details?: string;

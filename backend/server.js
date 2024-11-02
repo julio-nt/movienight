@@ -7,6 +7,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 
+app.use(`/api/login`, require("./routes/auth"));
+
 app.use(`/api/user`, require("./routes/user"));
 app.use(`/api/friend`, require("./routes/friend"));
 app.use(`/api/movie`, require("./routes/movie"));

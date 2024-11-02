@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: movie_night
+-- Host: localhost    Database: movie_night
 -- ------------------------------------------------------
--- Server version	9.0.0
+-- Server version	8.0.29
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -43,7 +43,7 @@ CREATE TABLE `movie` (
   `createdAt` timestamp NULL DEFAULT NULL,
   `updatedAt` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,7 +52,7 @@ CREATE TABLE `movie` (
 
 LOCK TABLES `movie` WRITE;
 /*!40000 ALTER TABLE `movie` DISABLE KEYS */;
-INSERT INTO `movie` VALUES (1,0,'The Substance',933260,'/lqoMzCcZYEFK729d6qzt349fB4o.jpg',NULL,NULL,0,0,0,0,1,'18,27,53',NULL,'2024-09-07',7.30,1147,'2024-11-02 02:04:30','2024-11-02 02:04:30'),(2,0,'Joker',475557,'/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg',NULL,NULL,1,0,0,0,0,'80,53,18',NULL,'2019-10-01',8.15,25567,'2024-11-02 05:00:13','2024-11-02 05:00:13'),(3,0,'Joker: Folie à Deux',889737,'/if8QiqCI7WAGImKcJCfzp6VTyKA.jpg',NULL,NULL,0,0,1,0,0,'18,80,53',NULL,'2024-10-01',5.71,1206,'2024-11-02 05:15:51','2024-11-02 05:15:51');
+INSERT INTO `movie` VALUES (1,1,'The Substance',933260,'/lqoMzCcZYEFK729d6qzt349fB4o.jpg',NULL,NULL,0,0,0,0,1,'18,27,53',NULL,'2024-09-07',7.30,1147,'2024-11-02 02:04:30','2024-11-02 02:04:30'),(2,1,'Joker',475557,'/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg',NULL,NULL,1,0,0,0,0,'80,53,18',NULL,'2019-10-01',8.15,25567,'2024-11-02 05:00:13','2024-11-02 05:00:13'),(3,1,'Joker: Folie à Deux',889737,'/if8QiqCI7WAGImKcJCfzp6VTyKA.jpg',NULL,NULL,0,0,1,0,0,'18,80,53',NULL,'2024-10-01',5.71,1206,'2024-11-02 05:15:51','2024-11-02 05:15:51'),(4,1,'Idiocracy',7512,'/rKsiNxKjhWEwndOgWPs273oy9EZ.jpg',NULL,NULL,0,0,0,0,1,'35,878,12',NULL,'2006-09-01',6.34,2948,'2024-11-02 20:56:22','2024-11-02 20:56:22'),(5,2,'The Substance',933260,'/lqoMzCcZYEFK729d6qzt349fB4o.jpg',NULL,NULL,0,0,0,0,1,'18,27,53',NULL,'2024-09-07',7.30,1187,'2024-11-02 21:11:37','2024-11-02 21:11:37');
 /*!40000 ALTER TABLE `movie` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -65,4 +65,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-02 12:53:14
+-- Dump completed on 2024-11-02 18:14:09

@@ -60,6 +60,14 @@ body {
   color: black;
 }
 
+.p-password {
+  color: black;
+}
+
+.float-label {
+  color: gray;
+}
+
 p {
   color: white;
 }

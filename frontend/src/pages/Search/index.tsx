@@ -51,9 +51,12 @@ const Search = () => {
   }
 
   const handleClick = async (item: ResultsModel, type: "fav" | "wish" | "like" | "dislike" | "hate" | "recommend") => {
+    const localUser = localStorage.getItem("user");
+    const localJson = JSON.parse(localUser!);
     try {
       const sendData: MovieApiModel = {
         name: item.title,
+        user_fk: localJson.id,
         id_tmdb: item.id,
         image_tmdb: item.poster_path,
         category_fk_list: item.genre_ids,

@@ -80,4 +80,37 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { getAllUsers, createUser, getUserById, updateUser, deleteUser };
+async function login(req, res) {
+  const { username, password } = req.body;
+
+  try {
+    if (!username) {
+      return res.status(400).json({ msg: "Usuário é necessário" });
+    }
+
+    if (!password) {
+      return res.status(400).json({ msg: "Senha é necessário" });
+    }
+
+    const allUsers = await User.findAll();
+    const userExists = allUsers.find((user) => user.username === username);
+
+    if (!userExists) {
+      return res.status(409).json({ msg: "Usuário não existe" });
+    }
+
+    if (userExists.password !== password) {
+      return res.status(409).json({ msg: "Senha incorreta" });
+    }
+
+    if (userExists.password === password) {
+      return res.status(200).json({ msg: "Logado com sucesso!", user: { ...userExists.dataValues } });
+    }
+
+    return res.status(500).json({ msg: "Erro inesperado" });
+  } catch (error) {
+    return res.status(500).json({ msg: "Algo deu errado" });
+  }
+}
+
+module.exports = { getAllUsers, createUser, getUserById, updateUser, deleteUser, login };
