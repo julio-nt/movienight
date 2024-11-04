@@ -47,7 +47,7 @@ async function getMovieByTmdbId(req, res) {
     if (movie) {
       return res.status(201).json(movie);
     }
-    throw new Error("Registro não encontrado.");
+    return res.status(204).json({ msg: "Registro não encontrado." });
   } catch (error) {
     console.error(error.message);
     return res.status(500).json({ error: "Erro ao buscar registro." });
@@ -58,9 +58,9 @@ async function getMovieByType(req, res) {
   const user_fk = req.headers.user_fk;
   const { type } = req.params;
 
-  console.log('aqui')
-  console.log(type)
-  console.log(user_fk)
+  console.log("aqui");
+  console.log(type);
+  console.log(user_fk);
   try {
     if (type === "favorite") {
       const movie = await Movie.findAll({

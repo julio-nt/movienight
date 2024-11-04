@@ -55,6 +55,7 @@ const Search = () => {
     const localJson = JSON.parse(localUser!);
 
     const dataExists: MovieApiModel = await getById("movie", item.id);
+    console.log(dataExists)
 
     try {
       const sendData: MovieApiModel = {
