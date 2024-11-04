@@ -37,14 +37,94 @@ async function getAllMovies(req, res) {
   }
 }
 
-async function getMovieById(req, res) {
-  const { id } = req.params;
+async function getMovieByTmdbId(req, res) {
+  const user_fk = req.headers.user_fk;
+  const { id_tmdb } = req.params;
   try {
-    const movie = await Movie.findByPk(id);
+    const movie = await Movie.findOne({
+      where: { user_fk, id_tmdb },
+    });
     if (movie) {
       return res.status(201).json(movie);
     }
     throw new Error("Registro não encontrado.");
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ error: "Erro ao buscar registro." });
+  }
+}
+
+async function getMovieByType(req, res) {
+  const user_fk = req.headers.user_fk;
+  const { type } = req.params;
+
+  console.log('aqui')
+  console.log(type)
+  console.log(user_fk)
+  try {
+    if (type === "favorite") {
+      const movie = await Movie.findAll({
+        where: { user_fk, favorite: 1 },
+      });
+      if (movie) {
+        return res.status(201).json(movie);
+      }
+    }
+
+    if (type === "liked") {
+      const movie = await Movie.findAll({
+        where: { user_fk, like: 1 },
+      });
+      if (movie) {
+        return res.status(201).json(movie);
+      }
+    }
+
+    if (type === "disliked") {
+      const movie = await Movie.findAll({
+        where: { user_fk, dislike: 1 },
+      });
+      if (movie) {
+        return res.status(201).json(movie);
+      }
+    }
+
+    if (type === "hate") {
+      const movie = await Movie.findAll({
+        where: { user_fk, hate: 1 },
+      });
+      if (movie) {
+        return res.status(201).json(movie);
+      }
+    }
+
+    if (type === "wish") {
+      const movie = await Movie.findAll({
+        where: { user_fk, wish_to_watch: 1 },
+      });
+      if (movie) {
+        return res.status(201).json(movie);
+      }
+    }
+    throw new Error("Registro não encontrado.");
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ error: "Erro ao buscar registro." });
+  }
+}
+
+async function getMovieByTmdb(req, res) {
+  const user_fk = req.headers.user_fk;
+  const { id_tmdb } = req.params;
+  try {
+    const movie = await Movie.findOne({
+      where: { user_fk, id_tmdb },
+    });
+    if (movie) {
+      return res.status(200).json(movie);
+    } else {
+      return res.status(404).json({ error: "Registro não encontrado." });
+    }
   } catch (error) {
     console.error(error.message);
     return res.status(500).json({ error: "Erro ao buscar registro." });
@@ -83,4 +163,4 @@ async function deleteMovie(req, res) {
   }
 }
 
-module.exports = { getAllMovies, createMovie, getMovieById, updateMovie, deleteMovie };
+module.exports = { getAllMovies, createMovie, getMovieByTmdbId, getMovieByType, updateMovie, deleteMovie };

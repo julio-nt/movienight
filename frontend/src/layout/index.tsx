@@ -1,7 +1,24 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar/Navbar";
+import { useEffect } from "react";
 
 const Layout = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const checkIsLogged = async () => {
+    const localUser = localStorage.getItem("user");
+    const userJson = JSON.parse(localUser!);
+
+    if (!userJson) {
+      navigate("/login");
+    }
+  };
+
+  useEffect(() => {
+    checkIsLogged();
+  }, [location]);
+
   return (
     <div className="min-h-screen bg-slate-800">
       <Navbar />

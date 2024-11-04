@@ -6,11 +6,11 @@ import myApi from "../../api/request/myApi";
 import { useEffect, useState } from "react";
 
 const Liked = () => {
-  const { getAll } = myApi();
+  const { getMovieByType } = myApi();
   const [movieLiked, setMovieLiked] = useState<MovieApiModel[]>([]);
 
   const loadData = async () => {
-    const moviesRequest: MovieApiModel[] = await getAll("movie");
+    const moviesRequest: MovieApiModel[] = await getMovieByType("movie", 'liked');
 
     setMovieLiked(moviesRequest.filter((mr) => mr.like));
   };

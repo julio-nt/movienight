@@ -17,8 +17,36 @@ const myApi = () => {
     return reponse.data;
   };
 
-  const getById = async (route: RoutesType, _id: string) => {
+  const getById = async (route: RoutesType, _id: number) => {
+    const localUser = localStorage.getItem("user");
+    const jsonUser = JSON.parse(localUser!);
+
+    const header = {
+      headers: {
+        user_fk: jsonUser?.id,
+      },
+    };
+
+    if (route === `movie`) {
+      const reponse = await axios.get(`${apiUrl}/api/${route}/${_id}`, header);
+      return reponse.data;
+    }
     const reponse = await axios.get(`${apiUrl}/api/${route}/${_id}`);
+
+    return reponse.data;
+  };
+
+  const getMovieByType = async (route: RoutesType, type: "favorite" | "liked" | "disliked" | "wish" | "hate") => {
+    const localUser = localStorage.getItem("user");
+    const jsonUser = JSON.parse(localUser!);
+
+    const header = {
+      headers: {
+        user_fk: jsonUser?.id,
+      },
+    };
+
+    const reponse = await axios.get(`${apiUrl}/api/${route}/all/${type}`, header);
 
     return reponse.data;
   };
@@ -29,7 +57,22 @@ const myApi = () => {
     return reponse.data;
   };
 
-  return { getAll, getById, postItem };
+  const updateItem = async (route: RoutesType, data: AllApiModels, _id: number) => {
+    const localUser = localStorage.getItem("user");
+    const jsonUser = JSON.parse(localUser!);
+
+    const header = {
+      headers: {
+        user_fk: jsonUser?.id,
+      },
+    };
+
+    const reponse = await axios.put(`${apiUrl}/api/${route}/${_id}`, data, header);
+
+    return reponse.data;
+  };
+
+  return { getAll, getById, getMovieByType, postItem, updateItem };
 };
 
 export default myApi;

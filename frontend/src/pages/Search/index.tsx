@@ -11,7 +11,7 @@ import { Toast } from "primereact/toast";
 
 const Search = () => {
   const { useSearch } = useApi();
-  const { postItem } = myApi();
+  const { postItem, getById, updateItem } = myApi();
 
   const toast = useRef<any>(null);
 
@@ -53,6 +53,9 @@ const Search = () => {
   const handleClick = async (item: ResultsModel, type: "fav" | "wish" | "like" | "dislike" | "hate" | "recommend") => {
     const localUser = localStorage.getItem("user");
     const localJson = JSON.parse(localUser!);
+
+    const dataExists: MovieApiModel = await getById("movie", item.id);
+
     try {
       const sendData: MovieApiModel = {
         name: item.title,
@@ -60,16 +63,17 @@ const Search = () => {
         id_tmdb: item.id,
         image_tmdb: item.poster_path,
         category_fk_list: item.genre_ids,
-        favorite: type === "fav",
-        dislike: type === "dislike",
-        wish_to_watch: type === "wish",
-        hate: type === "hate",
-        like: type === "like",
+        favorite: dataExists.favorite || type === "fav",
+        dislike: dataExists.dislike || type === "dislike",
+        wish_to_watch: dataExists.wish_to_watch || type === "wish",
+        hate: dataExists.hate || type === "hate",
+        like: dataExists.like || type === "like",
         vote_count: item.vote_count,
         vote_average: item.vote_average,
         release_date: item.release_date,
       };
-      await postItem("movie", sendData);
+
+      dataExists ? await updateItem("movie", sendData, dataExists.id!) : await postItem("movie", sendData);
 
       let toast_msg = "";
 
