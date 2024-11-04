@@ -8,6 +8,7 @@ import { Button } from "primereact/button";
 import { MovieApiModel } from "../../api/models";
 import myApi from "../../api/request/myApi";
 import { Toast } from "primereact/toast";
+import { Paginator, PaginatorPageChangeEvent } from "primereact/paginator";
 
 const Search = () => {
   const { useSearch } = useApi();
@@ -19,6 +20,8 @@ const Search = () => {
   const pesquisa = searchParams.get("p") || "";
 
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(0);
+
   const [resultList, setResultList] = useState<SearchResultModel | undefined>(undefined);
 
   const loadData = async () => {
@@ -55,7 +58,7 @@ const Search = () => {
     const localJson = JSON.parse(localUser!);
 
     const dataExists: MovieApiModel = await getById("movie", item.id);
-    console.log(dataExists)
+    console.log(dataExists);
 
     try {
       const sendData: MovieApiModel = {
@@ -104,6 +107,17 @@ const Search = () => {
     toast.current?.show({ severity: color, detail: text });
   };
 
+  const onPageChange = async (event: PaginatorPageChangeEvent) => {
+    console.log(event);
+    setPage(event.first);
+
+    const result: SearchResultModel = await useSearch(`${pesquisa}&page=2`);
+
+    if (result) {
+      setResultList(result);
+    }
+  };
+
   return (
     <div>
       <Toast ref={toast} position="top-center" />
@@ -136,6 +150,7 @@ const Search = () => {
             </Fieldset>
           );
         })}
+        <Paginator first={page} rows={resultList?.total_pages} totalRecords={resultList?.total_results || 0} rowsPerPageOptions={[5]} onPageChange={onPageChange} />
       </div>
     </div>
   );
