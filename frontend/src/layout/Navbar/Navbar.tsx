@@ -67,6 +67,11 @@ const Navbar = () => {
     }
   };
 
+  const handleLogout = async () => {
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
   const start = (
     <h2 className="text-2xl font-bold mr-[0.5rem] cursor-pointer pl-2" onClick={() => navigate("/")}>
       Movie Night
@@ -82,7 +87,7 @@ const Navbar = () => {
       >
         <InputGroup value={input} setValue={setInput} />
       </form>
-      <div className="min-w-[100px]">
+      <div className="min-w-[100px] cursor-pointer" onClick={handleLogout}>
         <p>Olá {user?.name}</p>
       </div>
     </div>

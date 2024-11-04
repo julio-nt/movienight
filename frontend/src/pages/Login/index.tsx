@@ -46,13 +46,13 @@ const Login = () => {
         <h3 className="font-medium text-lg text-white text-center">Login</h3>
         <IText id="username" placeholder="Usuário" value={username} setValue={setUsername} />
         <IText id="password" type="password" placeholder="Senha" value={password} setValue={setPassword} />
-        <Button label="Entrar" type="submit" className="bg-green-500 p-2 text-white hover:bg-green-400 w-[196.8px] m-auto" onClick={handleLogin} />
+        <Button label="Entrar" type="submit" className="bg-green-600 p-2 text-gray-300 hover:bg-green-500 w-[196.8px] m-auto" />
 
         {error && <ErrorMessage message={error} className="mt-[-.5rem]" />}
 
         <p className="max-w[197.5px] text-gray-400">
           Não possui conta?{" "}
-          <Link to={"/"} className="font-bold hover:text-gray-300">
+          <Link to={"/cadastro"} className="font-bold hover:text-gray-300">
             registre-se
           </Link>
         </p>
