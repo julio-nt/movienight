@@ -1,5 +1,5 @@
 const imageRoute = "https://image.tmdb.org/t/p/original";
 
-const apiUrl = "http://localhost:5000";
+const apiUrl = "https://movienight-m7bp.onrender.com";
 
 export { imageRoute, apiUrl };
