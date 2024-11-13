@@ -5,7 +5,8 @@ require("dotenv").config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: "https://movienight-web.vercel.app/", optionsSuccessStatus: 200 }));
+app.use(cors());
+// app.use(cors({ origin: "https://movienight-web.vercel.app/", optionsSuccessStatus: 200 }));
 
 app.use(`/api/login`, require("./routes/auth"));
 
