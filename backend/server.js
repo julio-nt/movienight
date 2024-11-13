@@ -15,4 +15,6 @@ app.use(`/api/movie`, require("./routes/movie"));
 app.use(`/api/category`, require("./routes/category"));
 app.use(`/api/sub-category`, require("./routes/sub-category"));
 
-module.exports = app;
+app.listen(3000, () => {
+  console.log(`Example app listening on port ${3000}`);
+});
