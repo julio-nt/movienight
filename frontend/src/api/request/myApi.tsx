@@ -18,6 +18,7 @@ const myApi = () => {
   };
 
   const getById = async (route: RoutesType, _id: number) => {
+    // get by tmdb ID
     const localUser = localStorage.getItem("user");
     const jsonUser = JSON.parse(localUser!);
 
