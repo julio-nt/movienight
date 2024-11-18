@@ -103,3 +103,12 @@ p {
 .btn-success:hover {
   background-color: #45cd3e;
 }
+
+.p-paginator {
+  background-color: #334155;
+  color: white;
+}
+
+.p-paginator-element:hover {
+  background-color: #94a3b8;
+}

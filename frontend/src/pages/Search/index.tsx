@@ -10,6 +10,8 @@ import myApi from "../../api/request/myApi";
 import { Toast } from "primereact/toast";
 import { Paginator, PaginatorPageChangeEvent } from "primereact/paginator";
 import { CategoryTypes } from "../../types/CategoryTypes";
+import { ScrollTop } from "primereact/scrolltop";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 const Search = () => {
   const { useSearch } = useApi();
@@ -150,6 +152,7 @@ const Search = () => {
 
       <p className="text-lg">Busca: {pesquisa}</p>
       <div className="space-y-4">
+        <Paginator first={page} rows={20} totalRecords={resultList?.total_results || 0} onPageChange={onPageChange} />
         {resultList?.results.map((result) => {
           return (
             <Fieldset key={result.id}>
@@ -171,6 +174,7 @@ const Search = () => {
         })}
         <Paginator first={page} rows={20} totalRecords={resultList?.total_results || 0} onPageChange={onPageChange} />
       </div>
+      <ScrollTop className="bg-gray-500" />
     </div>
   );
 };
