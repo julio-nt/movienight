@@ -1,7 +1,6 @@
 import { Menubar } from "primereact/menubar";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import InputGroup from "../../components/Inputs/InputGroup";
 import useWidth from "../../utils/useWidth";
 import InplaceInput from "../../components/Inputs/InplaceInput";
 

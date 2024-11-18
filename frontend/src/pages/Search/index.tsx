@@ -11,7 +11,6 @@ import { Toast } from "primereact/toast";
 import { Paginator, PaginatorPageChangeEvent } from "primereact/paginator";
 import { CategoryTypes } from "../../types/CategoryTypes";
 import { ScrollTop } from "primereact/scrolltop";
-import { Icon } from "@iconify/react/dist/iconify.js";
 
 const Search = () => {
   const { useSearch } = useApi();
