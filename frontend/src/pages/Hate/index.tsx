@@ -23,7 +23,7 @@ const Hated = () => {
     <div className="space-y-8">
       <Title title="Odiei" />
       <Fieldset>
-        <MovieCard data={movieHated} setMovie={setMovieHated} currentScreenType="hate" />
+        <MovieCard data={movieHated} setMovie={setMovieHated} currentScreenType="hate" hasChip />
         {movieHated.length === 0 && <p>Nenhum filme adicionado a lista de odiei</p>}
       </Fieldset>
     </div>

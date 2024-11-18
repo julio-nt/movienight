@@ -23,7 +23,7 @@ const Wish = () => {
     <div className="space-y-8">
       <Title title="Quero Assistir" />
       <Fieldset>
-        <MovieCard data={movieWish} />
+        <MovieCard data={movieWish} setMovie={setMovieWish} currentScreenType="wish_to_watch" hasChip />
         {movieWish.length === 0 && <p>Nenhum filme adicionado a wishlist</p>}
       </Fieldset>
     </div>

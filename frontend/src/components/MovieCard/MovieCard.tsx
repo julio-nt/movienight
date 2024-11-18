@@ -6,11 +6,12 @@ import myApi from "../../api/request/myApi";
 
 type Props = {
   data: MovieApiModel[];
-  setMovie: any;
-  currentScreenType: CategoryTypes;
+  setMovie?: any;
+  currentScreenType?: CategoryTypes;
+  hasChip?: boolean;
 };
 
-const MovieCard = ({ data, setMovie, currentScreenType }: Props) => {
+const MovieCard = ({ data, setMovie, currentScreenType, hasChip }: Props) => {
   const { updateItem } = myApi();
   const handleRemove = async (type: CategoryTypes, item: MovieApiModel) => {
     const updatedData: MovieApiModel = {
@@ -34,13 +35,15 @@ const MovieCard = ({ data, setMovie, currentScreenType }: Props) => {
               <p className="text-center">{item.name}</p>
               <p>Nota: {item.vote_average}</p>
               {item.release_date && <p>Lançamento: {new Date(item.release_date).toLocaleDateString()}</p>}
-              <div className="flex gap-2 flex-wrap">
-                {item.favorite && <Chip label="Favorito" removable onRemove={() => handleRemove("favorite", item)} />}
-                {item.wish_to_watch && <Chip label="Quero Assistir" removable onRemove={() => handleRemove("wish_to_watch", item)} />}
-                {item.like && <Chip label="Gostei" removable onRemove={() => handleRemove("like", item)} />}
-                {item.dislike && <Chip label="Não Gostei" removable onRemove={() => handleRemove("dislike", item)} />}
-                {item.hate && <Chip label="Odiei" removable onRemove={() => handleRemove("hate", item)} />}
-              </div>
+              {hasChip && (
+                <div className="flex gap-2 flex-wrap">
+                  {item.favorite && <Chip label="Favorito" removable onRemove={() => handleRemove("favorite", item)} />}
+                  {item.wish_to_watch && <Chip label="Quero Assistir" removable onRemove={() => handleRemove("wish_to_watch", item)} />}
+                  {item.like && <Chip label="Gostei" removable onRemove={() => handleRemove("like", item)} />}
+                  {item.dislike && <Chip label="Não Gostei" removable onRemove={() => handleRemove("dislike", item)} />}
+                  {item.hate && <Chip label="Odiei" removable onRemove={() => handleRemove("hate", item)} />}
+                </div>
+              )}
             </div>
           </div>
         );
