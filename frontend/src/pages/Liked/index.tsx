@@ -10,7 +10,7 @@ const Liked = () => {
   const [movieLiked, setMovieLiked] = useState<MovieApiModel[]>([]);
 
   const loadData = async () => {
-    const moviesRequest: MovieApiModel[] = await getMovieByType("movie", 'liked');
+    const moviesRequest: MovieApiModel[] = await getMovieByType("movie", "liked");
 
     setMovieLiked(moviesRequest.filter((mr) => mr.like));
   };
@@ -23,7 +23,7 @@ const Liked = () => {
     <div className="space-y-8">
       <Title title="Gostei" />
       <Fieldset>
-        <MovieCard data={movieLiked} />
+        <MovieCard data={movieLiked} setMovie={setMovieLiked} currentScreenType="like" />
         {movieLiked.length === 0 && <p>Nenhum filme adicionado a lista de gostei</p>}
       </Fieldset>
     </div>

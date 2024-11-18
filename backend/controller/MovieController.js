@@ -98,7 +98,7 @@ async function getMovieByType(req, res) {
       }
     }
 
-    if (type === "wish") {
+    if (type === "wish_to_watch") {
       const movie = await Movie.findAll({
         where: { user_fk, wish_to_watch: 1 },
       });

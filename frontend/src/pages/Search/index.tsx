@@ -9,10 +9,11 @@ import { MovieApiModel } from "../../api/models";
 import myApi from "../../api/request/myApi";
 import { Toast } from "primereact/toast";
 import { Paginator, PaginatorPageChangeEvent } from "primereact/paginator";
+import { CategoryTypes } from "../../types/CategoryTypes";
 
 const Search = () => {
   const { useSearch } = useApi();
-  const { postItem, getById, getAll, updateItem } = myApi();
+  const { postItem, getAll, updateItem } = myApi();
 
   const toast = useRef<any>(null);
 
@@ -58,49 +59,47 @@ const Search = () => {
     return <p>Carregando</p>;
   }
 
-  const handleClick = async (item: ResultsModel, type: "fav" | "wish" | "like" | "dislike" | "hate" | "recommend") => {
+  const handleClick = async (item: ResultsModel, type: CategoryTypes) => {
     setLoadingSend(true);
     const localUser = localStorage.getItem("user");
     const localJson = JSON.parse(localUser!);
 
-    const dataExists: MovieApiModel = await getById("movie", item.id);
+    const dataExists: MovieApiModel | undefined = userMoviesList.find((movie) => movie.id_tmdb === item.id) || undefined;
+    // retornar mensagem da api para usar no toast
 
     try {
-      const sendData: MovieApiModel = {
+      const updatedData: MovieApiModel = {
+        ...dataExists,
         name: item.title,
         user_fk: localJson.id,
         id_tmdb: item.id,
         image_tmdb: item.poster_path,
         category_fk_list: item.genre_ids,
-        favorite: dataExists.favorite && type === "fav" ? false : type === "fav",
-        dislike: dataExists.dislike && type === "dislike" ? false : type === "dislike",
-        wish_to_watch: dataExists.wish_to_watch && type === "wish" ? false : type === "wish",
-        hate: dataExists.hate && type === "hate" ? false : type === "hate",
-        like: dataExists.like && type === "like" ? false : type === "like",
+        favorite: dataExists?.favorite ? (type === "favorite" ? false : dataExists?.favorite) : type === "favorite",
+        dislike: dataExists?.dislike ? (type === "dislike" ? false : dataExists?.dislike) : type === "dislike",
+        wish_to_watch: dataExists?.wish_to_watch ? (type === "wish_to_watch" ? false : dataExists?.wish_to_watch) : type === "wish_to_watch",
+        hate: dataExists?.hate ? (type === "hate" ? false : dataExists?.hate) : type === "hate",
+        like: dataExists?.like ? (type === "like" ? false : dataExists?.like) : type === "like",
         vote_count: item.vote_count,
         vote_average: item.vote_average,
         release_date: item.release_date,
       };
 
-      dataExists ? await updateItem("movie", sendData, dataExists.id!) : await postItem("movie", sendData);
+      if (dataExists) {
+        await updateItem("movie", updatedData, dataExists.id!);
+        setUserMoviesList((prev) => prev.map((movie) => (movie.id_tmdb === item.id ? updatedData : movie)));
+      } else {
+        const newMovie = await postItem("movie", updatedData);
+        setUserMoviesList((prev) => [...prev, newMovie]);
+      }
 
       let toast_msg = "";
 
-      if (type === "fav") {
-        toast_msg = "Favoritado";
-      }
-      if (type === "dislike") {
-        toast_msg = "Definido como não gostei";
-      }
-      if (type === "wish") {
-        toast_msg = "Adicionado a lista de desejos";
-      }
-      if (type === "hate") {
-        toast_msg = "Destruido com sucesso";
-      }
-      if (type === "like") {
-        toast_msg = "Definido como gostei";
-      }
+      if (type === "favorite") toast_msg = "Favoritado";
+      if (type === "dislike") toast_msg = "Definido como não gostei";
+      if (type === "wish_to_watch") toast_msg = "Adicionado à lista de desejos";
+      if (type === "hate") toast_msg = "Destruído com sucesso";
+      if (type === "like") toast_msg = "Definido como gostei";
 
       show("success", `${toast_msg} com sucesso`);
     } catch (error) {
@@ -130,16 +129,17 @@ const Search = () => {
     const likedClass = hasData && hasData.like ? "btn-success" : "btn-light";
     const dislikedClass = hasData && hasData.dislike ? "btn-success" : "btn-light";
     const hatedClass = hasData && hasData.hate ? "btn-success" : "btn-light";
+
     // const recommendClass = hasData && hasData. ? "btn-success" : "btn-light";
 
     return (
       <div className="flex flex-wrap gap-4">
-        <Button label="Favoritar" className={favClass} onClick={() => handleClick(item, "fav")} />
-        <Button label="Quero Assistir" className={wishClass} onClick={() => handleClick(item, "wish")} />
-        <Button label="Gostei" className={likedClass} onClick={() => handleClick(item, "like")} />
-        <Button label="Não Gostei" className={dislikedClass} onClick={() => handleClick(item, "dislike")} />
-        <Button label="Odiei" className={hatedClass} onClick={() => handleClick(item, "hate")} />
-        <Button label="Recomendar" className="btn-light" onClick={() => handleClick(item, "recommend")} />
+        <Button label="Favoritar" className={favClass} onClick={() => handleClick(item, "favorite")} disabled={loadingSend} />
+        <Button label="Quero Assistir" className={wishClass} onClick={() => handleClick(item, "wish_to_watch")} disabled={loadingSend} />
+        <Button label="Gostei" className={likedClass} onClick={() => handleClick(item, "like")} disabled={loadingSend} />
+        <Button label="Não Gostei" className={dislikedClass} onClick={() => handleClick(item, "dislike")} disabled={loadingSend} />
+        <Button label="Odiei" className={hatedClass} onClick={() => handleClick(item, "hate")} disabled={loadingSend} />
+        {/* <Button label="Recomendar" className="btn-light" onClick={() => handleClick(item, "recommend")} disabled={loadingSend} /> */}
       </div>
     );
   };

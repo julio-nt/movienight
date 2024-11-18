@@ -37,7 +37,7 @@ const myApi = () => {
     return reponse.data;
   };
 
-  const getMovieByType = async (route: RoutesType, type: "favorite" | "liked" | "disliked" | "wish" | "hate") => {
+  const getMovieByType = async (route: RoutesType, type: "favorite" | "liked" | "disliked" | "wish_to_watch" | "hate") => {
     const localUser = localStorage.getItem("user");
     const jsonUser = JSON.parse(localUser!);
 

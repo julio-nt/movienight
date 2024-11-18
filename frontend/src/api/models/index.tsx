@@ -4,9 +4,9 @@ type AllApiModels = MovieApiModel;
 
 type MovieApiModel = {
   id?: number;
-  name: string;
-  user_fk: number;
-  id_tmdb: number;
+  name?: string;
+  user_fk?: number;
+  id_tmdb?: number;
   image_tmdb?: string;
   details?: string;
   rating?: number;
@@ -15,7 +15,7 @@ type MovieApiModel = {
   dislike?: boolean;
   hate?: boolean;
   wish_to_watch?: boolean;
-  category_fk_list: number[];
+  category_fk_list?: number[];
   sub_category_fk?: number;
   vote_average?: number;
   vote_count?: number;
