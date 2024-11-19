@@ -4,7 +4,7 @@ import { RouterProvider } from "react-router-dom";
 import browserRouter from "./routes/routes.tsx";
 
 import "./layout/global.css";
-import "primereact/resources/themes/lara-light-cyan/theme.css";
+import "primereact/resources/themes/md-dark-deeppurple/theme.css";
 import { PrimeReactProvider } from "primereact/api";
 
 createRoot(document.getElementById("root")!).render(

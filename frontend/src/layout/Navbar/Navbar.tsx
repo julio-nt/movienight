@@ -2,7 +2,8 @@ import { Menubar } from "primereact/menubar";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useWidth from "../../utils/useWidth";
-import InplaceInput from "../../components/Inputs/InplaceInput";
+// import InplaceInput from "../../components/Inputs/InplaceInput";
+import InputGroup from "../../components/Inputs/InputGroup";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -85,7 +86,7 @@ const Navbar = () => {
           handleSearch();
         }}
       >
-        <InplaceInput value={input} setValue={setInput} label="Buscar Filme" placeholder="Buscar Filme" />
+        <InputGroup value={input} setValue={setInput} />
       </form>
       <div className="min-w-[100px] cursor-pointer" onClick={handleLogout}>
         <p>Olá {user?.name}</p>
@@ -105,8 +106,8 @@ const Navbar = () => {
             handleSearch();
           }}
         >
-          {/* <InputGroup value={input} setValue={setInput} /> */}
-          <InplaceInput value={input} setValue={setInput} label="Buscar Filme" />
+          <InputGroup value={input} setValue={setInput} />
+          {/* <InplaceInput value={input} setValue={setInput} label="Buscar Filme" /> */}
         </form>
         <div className="min-w-[80px]">
           <p>Olá {user?.name}</p>
