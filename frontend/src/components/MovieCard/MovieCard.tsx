@@ -19,7 +19,7 @@ type Props = {
 const MovieCard = ({ data, setMovie, currentScreenType, hasChip, hasMenu = true }: Props) => {
   const { updateItem } = myApi();
 
-  const [loading, setLoading] = useState(true);
+  const [_loading, setLoading] = useState(true);
   const [selectedId, setSelectedId] = useState<any>();
   const [lastSelectedId, setLastSelectedId] = useState<any>();
 
