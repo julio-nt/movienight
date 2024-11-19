@@ -23,7 +23,7 @@ const Liked = () => {
     <div className="space-y-8">
       <Title title="Gostei" />
       <Fieldset>
-        <MovieCard data={movieLiked} setMovie={setMovieLiked} currentScreenType="like" hasChip />
+        <MovieCard data={movieLiked} setData={setMovieLiked} hasChip />
         {movieLiked.length === 0 && <p>Nenhum filme adicionado a lista de gostei</p>}
       </Fieldset>
     </div>

@@ -113,12 +113,12 @@ async function getMovieByType(req, res) {
   }
 }
 
-async function getMovieByTmdb(req, res) {
+async function getMovieById(req, res) {
   const user_fk = req.headers.user_fk;
-  const { id_tmdb } = req.params;
+  const { id } = req.params;
   try {
     const movie = await Movie.findOne({
-      where: { user_fk, id_tmdb },
+      where: { user_fk, id },
     });
     if (movie) {
       return res.status(200).json(movie);
@@ -163,4 +163,4 @@ async function deleteMovie(req, res) {
   }
 }
 
-module.exports = { getAllMovies, createMovie, getMovieByTmdbId, getMovieByType, updateMovie, deleteMovie };
+module.exports = { getAllMovies, createMovie, getMovieByTmdbId, getMovieByType, getMovieById, updateMovie, deleteMovie };

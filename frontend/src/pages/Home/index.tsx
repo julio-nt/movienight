@@ -32,27 +32,27 @@ const Home = () => {
       <Title title="Bem Vindo" className="" />
       <div className="space-y-4">
         <Fieldset legend="Favoritos">
-          <MovieCard data={movieFavorites.slice(0, 5)} hasMenu={false} />
+          <MovieCard data={movieFavorites.slice(0, 5)} />
           {movieFavorites.length === 0 && <p>Nenhum filme adicionado</p>}
         </Fieldset>
 
         <Fieldset legend="Gostei">
-          <MovieCard data={movieLiked.slice(0, 5)} hasMenu={false} />
+          <MovieCard data={movieLiked.slice(0, 5)} />
           {movieLiked.length === 0 && <p>Nenhum filme adicionado</p>}
         </Fieldset>
 
         <Fieldset legend="Não Gostei">
-          <MovieCard data={movieDisliked.slice(0, 5)} hasMenu={false} />
+          <MovieCard data={movieDisliked.slice(0, 5)} />
           {movieDisliked.length === 0 && <p>Nenhum filme adicionado</p>}
         </Fieldset>
 
         <Fieldset legend="Odiei">
-          <MovieCard data={movieHated.slice(0, 5)} hasMenu={false} />
+          <MovieCard data={movieHated.slice(0, 5)} />
           {movieHated.length === 0 && <p>Nenhum filme adicionado</p>}
         </Fieldset>
 
         <Fieldset legend="Quero Assistir">
-          <MovieCard data={movieWish.slice(0, 5)} hasMenu={false} />
+          <MovieCard data={movieWish.slice(0, 5)} />
           {movieWish.length === 0 && <p>Nenhum filme adicionado</p>}
         </Fieldset>
       </div>

@@ -23,7 +23,7 @@ const Favorites = () => {
     <div className="space-y-8">
       <Title title="Favoritos" />
       <Fieldset>
-        <MovieCard data={movieFavorites} setMovie={setMovieFavorites} currentScreenType='favorite' hasChip />
+        <MovieCard data={movieFavorites} setData={setMovieFavorites} hasChip />
         {movieFavorites.length === 0 && <p>Nenhum filme adicionado aos favoritos</p>}
       </Fieldset>
     </div>

@@ -112,3 +112,15 @@ p {
 .p-paginator-element:hover {
   background-color: #94a3b8;
 }
+
+.p-inputtext {
+  color: white;
+}
+
+.p-speeddial-action {
+  background-color: rgb(24 24 27);
+}
+
+.p-speeddial-action:hover {
+  background-color: rgb(39 39 42);
+}

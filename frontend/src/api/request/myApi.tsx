@@ -37,6 +37,26 @@ const myApi = () => {
     return reponse.data;
   };
 
+  const getByTmdbId = async (route: RoutesType, _id: number) => {
+    // get by tmdb ID
+    const localUser = localStorage.getItem("user");
+    const jsonUser = JSON.parse(localUser!);
+
+    const header = {
+      headers: {
+        user_fk: jsonUser?.id,
+      },
+    };
+
+    if (route === `movie`) {
+      const reponse = await axios.get(`${apiUrl}/api/${route}/tmdb/${_id}`, header);
+      return reponse.data;
+    }
+    const reponse = await axios.get(`${apiUrl}/api/${route}/${_id}`);
+
+    return reponse.data;
+  };
+
   const getMovieByType = async (route: RoutesType, type: "favorite" | "liked" | "disliked" | "wish_to_watch" | "hate") => {
     const localUser = localStorage.getItem("user");
     const jsonUser = JSON.parse(localUser!);
@@ -73,7 +93,7 @@ const myApi = () => {
     return reponse.data;
   };
 
-  return { getAll, getById, getMovieByType, postItem, updateItem };
+  return { getAll, getById, getByTmdbId, getMovieByType, postItem, updateItem };
 };
 
 export default myApi;
